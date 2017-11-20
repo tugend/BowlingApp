@@ -14,6 +14,7 @@ Tiden løb lidt fra mig til sidst, men jeg vil mene opgaven er løst.
 - Det er op til diskussion, men jeg ville nok mene at interfacene til 'calculatorne' er 
   premature abstraktioner når der ikke er behov for variabilitetspunkter.
 - Håndtering af flere spillere er ikke implementeret.
+- Visse abstraktioner som fx en Frame kunne evt. være blevet abstraheret ud i en klasse
 
 Kørsel
 1) Kør fra VS, RunnerCli projektet er sat til at køre det givne eksempel igennem til og med tredje sidste input.

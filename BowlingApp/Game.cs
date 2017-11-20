@@ -12,7 +12,7 @@ namespace BowlingApp
         public event EventHandler<NewRollEvent> OnNextRoll;
         public event EventHandler<EndEvent> OnEnd;
 
-        private List<int[]> Entries { get; }
+        private List<int[]> Frames { get; }
         private IScoreCalculator ScoreCalculator { get; } 
         private IGameStateCalculator GameStateCalculator { get; }
 
@@ -20,12 +20,12 @@ namespace BowlingApp
         {
             ScoreCalculator = scoreCalculator;
             GameStateCalculator = gameStateCalculator;
-            Entries = new List<int[]>();
+            Frames = new List<int[]>();
         }
 
         public Game Register(int pinsKnockedDown)
         {
-            var newHead = AddOrUpdateHead(pinsKnockedDown, Entries);
+            var newHead = AddOrUpdateHead(pinsKnockedDown, Frames);
 
             var isLastRollOfFrame = IsLastRollOfFrame(newHead);
             if (isLastRollOfFrame)
@@ -56,24 +56,24 @@ namespace BowlingApp
         private void NotifyOnNextRoll(int pinsKnockedDown) =>
             OnNextRoll?.Invoke(
                 this, 
-                new NewRollEvent(frameNumber: Math.Min(Entries.Count, 10), roll: pinsKnockedDown));
+                new NewRollEvent(frameNumber: Math.Min(Frames.Count, 10), roll: pinsKnockedDown));
 
         private void NotifyNextFrame(int pinsKnockedDown, (int score, Note note) score) => 
             OnNextFrame?.Invoke(
                 this, 
-                new NewFrameEvent(frameNumber: Math.Min(Entries.Count, 10), roll: pinsKnockedDown, score: score.score, bonus: score.note, totalScore: GetTotalScore()));
+                new NewFrameEvent(frameNumber: Math.Min(Frames.Count, 10), roll: pinsKnockedDown, score: score.score, bonus: score.note, totalScore: GetTotalScore()));
 
         private void StartNewFrame() => 
-            Entries.Add(new int[0]);
+            Frames.Add(new int[0]);
 
         private bool IsLastRollOfFrame(int[] updatedEntry) => 
             GameStateCalculator.IsLastRollOfFrame(updatedEntry);
 
         public bool IsDone() => 
-            GameStateCalculator.HasGameEnded(Entries.ToArray());
+            GameStateCalculator.HasGameEnded(Frames.ToArray());
 
         public int GetTotalScore() => 
-            ScoreCalculator.CalculateAccumulatedScores(Entries.ToArray()).Select(x => x.score).LastOrDefault();
+            ScoreCalculator.CalculateAccumulatedScores(Frames.ToArray()).Select(x => x.score).LastOrDefault();
 
         private static int[] AddOrUpdateHead(int pinsKnockedDown, List<int[]> frames)
         {
