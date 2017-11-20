@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BowlingApp\ScoreTracker.csproj" />
+    <ProjectReference Include="..\BowlingApp\BowlingApp.csproj" />
   </ItemGroup>
 
 </Project>
