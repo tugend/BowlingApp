@@ -15,6 +15,8 @@ Tiden løb lidt fra mig til sidst, men jeg vil mene opgaven er løst.
   premature abstraktioner når der ikke er behov for variabilitetspunkter.
 - Håndtering af flere spillere er ikke implementeret.
 - Visse abstraktioner som fx en Frame kunne evt. være blevet abstraheret ud i en klasse
+- Jeg burde ikke have kaldt projektet for BownlingApp, et mere passende navn (og repository havde været 
+BownlingScoreTracker)
 
 Kørsel
 1) Kør fra VS, RunnerCli projektet er sat til at køre det givne eksempel igennem til og med tredje sidste input.
